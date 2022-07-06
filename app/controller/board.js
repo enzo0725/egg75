@@ -2,7 +2,7 @@
 
 const Controller = require('egg').Controller;
 
-class UsersController extends Controller {
+class BoardController extends Controller {
     async index() {
         const ctx=this.ctx;
         let msgs=await ctx.model.Message.findAll({
@@ -38,6 +38,18 @@ class UsersController extends Controller {
 
     async update() {
         const ctx=this.ctx;
+        let id=ctx.params.id;
+        const msg=await ctx.model.Message.findByPk(id);
+        if(!msg){
+            ctx.status=404;
+            return;
+        }
+        await msg.update({
+            name: ctx.request.body.name,
+            email: ctx.request.body.email,
+            message: ctx.request.body.message,
+        });
+        ctx.status=200;
     }
 
     async destroy() {
@@ -53,4 +65,4 @@ class UsersController extends Controller {
     }
 }
 
-module.exports = UsersController;
+module.exports = BoardController;

@@ -5,9 +5,9 @@
  */
 module.exports = app => {
   const { router, controller } = app;  
-  router.get('/message', controller.users.index);
-  router.post('/message', controller.users.create);
-  router.get('/message/:id', controller.users.show);
-  // router.patch('/message/:id', controller.user.update);
-  router.delete('/message/:id',controller.users.destroy);
+  router.get('/message', controller.board.index);
+  router.post('/message', controller.board.create);
+  router.get('/message/:id', controller.board.show);
+  router.patch('/message/:id', controller.board.update);
+  router.delete('/message/:id',controller.board.destroy);
 };
